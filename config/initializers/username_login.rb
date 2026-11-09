@@ -18,6 +18,18 @@ module UsernameLogin
     email.to_s.delete_suffix("@#{DOMAIN}")
   end
 
+  # Only administrators change usernames and passwords, including their own.
+  def self.admin?(user)
+    user.is_a?(SuperAdmin) || user.account_users.administrator.exists?
+  end
+
+  # Without SMTP there is no "forgot password": an administrator resets it.
+  module PasswordsPatch
+    def create
+      render json: { message: I18n.t('username_login.password_recovery_disabled') }, status: :forbidden
+    end
+  end
+
   module SessionsPatch
     private
 
@@ -95,6 +107,12 @@ module UsernameLogin
   module ProfilesPatch
     def update
       login = UsernameLogin.normalize(params.dig(:profile, :email))
+      changing = params.dig(:profile, :password).present? ||
+                 (login.present? && login != UsernameLogin.to_login(@user.email))
+      if changing && !UsernameLogin.admin?(@user)
+        return render json: { message: I18n.t('username_login.admin_only') }, status: :forbidden
+      end
+
       if login == UsernameLogin.to_login(@user.email)
         params[:profile].delete(:email)
       elsif login.present?
@@ -112,4 +130,5 @@ Rails.application.config.to_prepare do
   DeviseOverrides::SessionsController.prepend(UsernameLogin::SessionsPatch)
   Api::V1::Accounts::AgentsController.prepend(UsernameLogin::AgentsPatch)
   Api::V1::ProfilesController.prepend(UsernameLogin::ProfilesPatch)
+  DeviseOverrides::PasswordsController.prepend(UsernameLogin::PasswordsPatch)
 end
