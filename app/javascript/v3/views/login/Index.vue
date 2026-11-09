@@ -515,17 +515,7 @@ export default {
             :placeholder="$t('LOGIN.PASSWORD.PLACEHOLDER')"
             :has-error="v$.credentials.password.$error"
             @input="v$.credentials.password.$touch"
-          >
-            <p v-if="!globalConfig.disableUserProfileUpdate">
-              <router-link
-                :to="resetPasswordRoute"
-                class="text-sm text-link"
-                tabindex="4"
-              >
-                {{ $t('LOGIN.FORGOT_PASSWORD') }}
-              </router-link>
-            </p>
-          </FormInput>
+          />
           <NextButton
             lg
             type="submit"

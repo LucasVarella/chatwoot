@@ -4,3 +4,5 @@ en:
     weak_password: 'Weak password: use at least 6 characters, with uppercase, lowercase, a number and a special character.'
     username_taken: 'This username is already taken.'
     credentials_protected: 'The username and password of this account cannot be changed here.'
+    admin_only: 'Only administrators can change usernames and passwords.'
+    password_recovery_disabled: 'Password recovery is disabled. Ask an administrator.'

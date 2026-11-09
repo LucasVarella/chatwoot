@@ -103,6 +103,12 @@ export default {
       globalConfig: 'globalConfig/get',
       isOnChatwootCloud: 'globalConfig/isOnChatwootCloud',
     }),
+    // Only administrators change usernames and passwords, including their own.
+    canManageCredentials() {
+      return (this.currentUser.accounts || []).some(
+        account => account.role === 'administrator'
+      );
+    },
     apiAndWebhooksEnabled() {
       if (!this.isOnChatwootCloud) return true;
 
@@ -242,7 +248,9 @@ export default {
           :name="name"
           :display-name="displayName"
           :email="email"
-          :email-enabled="!globalConfig.disableUserProfileUpdate"
+          :email-enabled="
+            !globalConfig.disableUserProfileUpdate && canManageCredentials
+          "
           @update-user="updateProfile"
         />
       </div>
@@ -315,7 +323,7 @@ export default {
       </div>
     </SectionLayout>
     <SectionLayout
-      v-if="!globalConfig.disableUserProfileUpdate"
+      v-if="!globalConfig.disableUserProfileUpdate && canManageCredentials"
       with-border
       :title="$t('PROFILE_SETTINGS.FORM.PASSWORD_SECTION.TITLE')"
       description=""

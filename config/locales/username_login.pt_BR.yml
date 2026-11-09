@@ -4,3 +4,5 @@ pt_BR:
     weak_password: 'Senha fraca: use no mínimo 6 caracteres, com maiúscula, minúscula, número e caractere especial.'
     username_taken: 'Este usuário já existe.'
     credentials_protected: 'Não é permitido alterar o usuário e a senha desta conta por aqui.'
+    admin_only: 'Apenas administradores podem alterar usuário e senha.'
+    password_recovery_disabled: 'Recuperação de senha desativada. Peça a um administrador.'
