@@ -24,7 +24,7 @@
     },
     "ADD": {
       "TITLE": "Adicionar agente a seu time",
-      "DESC": "Você pode adicionar pessoas que poderão acompanhar o suporte de suas caixas de entrada.",
+      "DESC": "Defina o usuário e a senha que a pessoa usará para entrar.",
       "CANCEL_BUTTON_TEXT": "Cancelar",
       "FORM": {
         "NAME": {
@@ -39,6 +39,14 @@
         "EMAIL": {
           "LABEL": "Endereço de e-mail",
           "PLACEHOLDER": "Por favor, insira um endereço de e-mail do agente"
+        },
+        "USERNAME": {
+          "LABEL": "Usuário",
+          "PLACEHOLDER": "joao.silva"
+        },
+        "PASSWORD": {
+          "LABEL": "Senha",
+          "PLACEHOLDER": "Mín. 6 caracteres, com maiúscula, minúscula, número e especial"
         },
         "SUBMIT": "Adicionar agente"
       },
@@ -77,6 +85,13 @@
           "LABEL": "Endereço de email",
           "PLACEHOLDER": "Por favor, insira um endereço de e-mail do agente"
         },
+        "USERNAME": {
+          "LABEL": "Usuário"
+        },
+        "NEW_PASSWORD": {
+          "LABEL": "Nova senha",
+          "PLACEHOLDER": "Deixe em branco para manter a atual"
+        },
         "AGENT_AVAILABILITY": {
           "LABEL": "Disponibilidade",
           "PLACEHOLDER": "Por favor, selecione a disponibilidade do agente",
@@ -88,7 +103,8 @@
       "CANCEL_BUTTON_TEXT": "Cancelar",
       "API": {
         "SUCCESS_MESSAGE": "Agente atualizado com sucesso",
-        "ERROR_MESSAGE": "Não foi possível conectar ao servidor Woot, por favor tente novamente mais tarde"
+        "ERROR_MESSAGE": "Não foi possível conectar ao servidor Woot, por favor tente novamente mais tarde",
+        "CREDENTIALS_ERROR": "Não foi possível salvar. Confira se o usuário já existe e se a senha atende às regras."
       },
       "PASSWORD_RESET": {
         "ADMIN_RESET_BUTTON": "Redefinir a senha",

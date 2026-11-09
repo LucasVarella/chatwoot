@@ -226,6 +226,11 @@
         "ERROR": "Por favor, insira um endereço de e-mail válido",
         "PLACEHOLDER": "Por favor, insira seu endereço de e-mail, que será exibido em conversas"
       },
+      "USERNAME": {
+        "LABEL": "Usuário",
+        "ERROR": "Informe seu usuário",
+        "PLACEHOLDER": "seu.usuario"
+      },
       "CURRENT_PASSWORD": {
         "LABEL": "Senha atual",
         "ERROR": "Por favor, digite a senha atual",

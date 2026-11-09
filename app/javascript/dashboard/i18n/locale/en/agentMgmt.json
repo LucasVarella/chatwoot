@@ -24,7 +24,7 @@
     },
     "ADD": {
       "TITLE": "Add agent to your team",
-      "DESC": "You can add people who will be able to handle support for your inboxes.",
+      "DESC": "Set the username and password the person will use to sign in.",
       "CANCEL_BUTTON_TEXT": "Cancel",
       "FORM": {
         "NAME": {
@@ -39,6 +39,14 @@
         "EMAIL": {
           "LABEL": "Email Address",
           "PLACEHOLDER": "Please enter an email address of the agent"
+        },
+        "USERNAME": {
+          "LABEL": "Username",
+          "PLACEHOLDER": "john.smith"
+        },
+        "PASSWORD": {
+          "LABEL": "Password",
+          "PLACEHOLDER": "At least 6 characters, with uppercase, lowercase, a number and a special character"
         },
         "SUBMIT": "Add Agent"
       },
@@ -77,6 +85,13 @@
           "LABEL": "Email Address",
           "PLACEHOLDER": "Please enter an email address of the agent"
         },
+        "USERNAME": {
+          "LABEL": "Username"
+        },
+        "NEW_PASSWORD": {
+          "LABEL": "New password",
+          "PLACEHOLDER": "Leave blank to keep the current one"
+        },
         "AGENT_AVAILABILITY": {
           "LABEL": "Availability",
           "PLACEHOLDER": "Please select an availability status",
@@ -88,7 +103,8 @@
       "CANCEL_BUTTON_TEXT": "Cancel",
       "API": {
         "SUCCESS_MESSAGE": "Agent updated successfully",
-        "ERROR_MESSAGE": "Could not connect to Woot Server, Please try again later"
+        "ERROR_MESSAGE": "Could not connect to Woot Server, Please try again later",
+        "CREDENTIALS_ERROR": "Could not save. Check that the username is not taken and that the password meets the requirements."
       },
       "PASSWORD_RESET": {
         "ADMIN_RESET_BUTTON": "Reset Password",

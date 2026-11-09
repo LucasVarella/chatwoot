@@ -6,6 +6,11 @@
       "PLACEHOLDER": "nome{'@'}empresa.com.br",
       "ERROR": "Por favor, insira um endereço de e-mail válido"
     },
+    "USERNAME": {
+      "LABEL": "Usuário",
+      "PLACEHOLDER": "seu.usuario",
+      "ERROR": "Informe seu usuário"
+    },
     "PASSWORD": {
       "LABEL": "Senha",
       "PLACEHOLDER": "Senha"

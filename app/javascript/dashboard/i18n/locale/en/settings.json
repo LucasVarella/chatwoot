@@ -226,6 +226,11 @@
         "ERROR": "Please enter a valid email address",
         "PLACEHOLDER": "Please enter your email address, this would be displayed in conversations"
       },
+      "USERNAME": {
+        "LABEL": "Username",
+        "ERROR": "Please enter your username",
+        "PLACEHOLDER": "your.username"
+      },
       "CURRENT_PASSWORD": {
         "LABEL": "Current password",
         "ERROR": "Please enter the current password",

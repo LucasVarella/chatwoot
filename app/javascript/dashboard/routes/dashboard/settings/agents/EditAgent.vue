@@ -6,7 +6,6 @@ import { useStore, useMapGetter } from 'dashboard/composables/store';
 import { useI18n } from 'vue-i18n';
 import { useAlert } from 'dashboard/composables';
 import Button from 'dashboard/components-next/button/Button.vue';
-import Auth from '../../../../api/auth';
 import wootConstants from 'dashboard/constants/globals';
 
 const props = defineProps({
@@ -50,7 +49,9 @@ const { t } = useI18n();
 const agentName = ref(props.name);
 const agentAvailability = ref(props.availability);
 const selectedRoleId = ref(props.customRoleId || props.type);
-const agentCredentials = ref({ email: props.email });
+// The username is sent as `email`; a new password is only sent when filled in.
+const agentUsername = ref(props.email);
+const agentPassword = ref('');
 
 const rules = {
   agentName: { required, minLength: minLength(1) },
@@ -126,6 +127,8 @@ const editAgent = async () => {
       id: props.id,
       name: agentName.value,
       availability: agentAvailability.value,
+      email: agentUsername.value,
+      ...(agentPassword.value ? { password: agentPassword.value } : {}),
     };
 
     if (selectedRole.value.name.startsWith('custom_')) {
@@ -139,16 +142,7 @@ const editAgent = async () => {
     useAlert(t('AGENT_MGMT.EDIT.API.SUCCESS_MESSAGE'));
     emit('close');
   } catch (error) {
-    useAlert(t('AGENT_MGMT.EDIT.API.ERROR_MESSAGE'));
-  }
-};
-
-const resetPassword = async () => {
-  try {
-    await Auth.resetPassword(agentCredentials.value);
-    useAlert(t('AGENT_MGMT.EDIT.PASSWORD_RESET.ADMIN_SUCCESS_MESSAGE'));
-  } catch (error) {
-    useAlert(t('AGENT_MGMT.EDIT.PASSWORD_RESET.ERROR_MESSAGE'));
+    useAlert(t('AGENT_MGMT.EDIT.API.CREDENTIALS_ERROR'));
   }
 };
 </script>
@@ -204,19 +198,27 @@ const resetPassword = async () => {
         </label>
       </div>
 
-      <div class="flex flex-row justify-start w-full gap-2 px-0 py-2">
-        <div class="w-[50%] ltr:text-left rtl:text-right">
-          <Button
-            v-if="provider !== 'saml'"
-            ghost
-            type="button"
-            icon="i-lucide-lock-keyhole"
-            class="!px-2"
-            :label="$t('AGENT_MGMT.EDIT.PASSWORD_RESET.ADMIN_RESET_BUTTON')"
-            @click.prevent="resetPassword"
+      <div class="w-full">
+        <label>
+          {{ $t('AGENT_MGMT.EDIT.FORM.USERNAME.LABEL') }}
+          <input v-model="agentUsername" type="text" autocomplete="off" />
+        </label>
+      </div>
+
+      <div v-if="provider !== 'saml'" class="w-full">
+        <label>
+          {{ $t('AGENT_MGMT.EDIT.FORM.NEW_PASSWORD.LABEL') }}
+          <input
+            v-model="agentPassword"
+            type="password"
+            autocomplete="new-password"
+            :placeholder="$t('AGENT_MGMT.EDIT.FORM.NEW_PASSWORD.PLACEHOLDER')"
           />
-        </div>
-        <div class="w-[50%] flex justify-end items-center gap-2">
+        </label>
+      </div>
+
+      <div class="flex flex-row justify-start w-full gap-2 px-0 py-2">
+        <div class="w-full flex justify-end items-center gap-2">
           <Button
             faded
             slate
