@@ -3,7 +3,7 @@
 import { login } from '../../api/auth';
 import { mapGetters } from 'vuex';
 import { useAlert } from 'dashboard/composables';
-import { required, email } from '@vuelidate/validators';
+import { required } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import { SESSION_STORAGE_KEYS } from 'dashboard/constants/sessionStorage';
 import SessionStorage from 'shared/helpers/sessionStorage';
@@ -93,9 +93,9 @@ export default {
         password: {
           required,
         },
+        // Usernames are accepted too, so only presence is checked.
         email: {
           required,
-          email,
         },
       },
     };
@@ -289,7 +289,7 @@ export default {
     },
     submitFormLogin() {
       if (this.v$.credentials.email.$invalid && !this.email) {
-        this.showAlertMessage(this.$t('LOGIN.EMAIL.ERROR'));
+        this.showAlertMessage(this.$t('LOGIN.USERNAME.ERROR'));
         return;
       }
 
@@ -499,8 +499,8 @@ export default {
             data-testid="email_input"
             :tabindex="1"
             required
-            :label="$t('LOGIN.EMAIL.LABEL')"
-            :placeholder="$t('LOGIN.EMAIL.PLACEHOLDER')"
+            :label="$t('LOGIN.USERNAME.LABEL')"
+            :placeholder="$t('LOGIN.USERNAME.PLACEHOLDER')"
             :has-error="v$.credentials.email.$error"
             @input="v$.credentials.email.$touch"
           />

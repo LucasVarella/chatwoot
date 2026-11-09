@@ -1,0 +1,6 @@
+pt_BR:
+  username_login:
+    invalid_username: 'Usuário inválido: use letras, números, ponto, hífen ou sublinhado.'
+    weak_password: 'Senha fraca: use no mínimo 6 caracteres, com maiúscula, minúscula, número e caractere especial.'
+    username_taken: 'Este usuário já existe.'
+    credentials_protected: 'Não é permitido alterar o usuário e a senha desta conta por aqui.'

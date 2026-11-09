@@ -2,7 +2,7 @@
 import { useAlert } from 'dashboard/composables';
 import NextButton from 'dashboard/components-next/button/Button.vue';
 import { useVuelidate } from '@vuelidate/core';
-import { required, minLength, email } from '@vuelidate/validators';
+import { required, minLength } from '@vuelidate/validators';
 export default {
   components: {
     NextButton,
@@ -48,9 +48,9 @@ export default {
       minLength: minLength(1),
     },
     userDisplayName: {},
+    // Holds the username; the server stores it as an internal address.
     userEmail: {
       required,
-      email,
     },
   },
   watch: {
@@ -123,10 +123,10 @@ export default {
       v-model="userEmail"
       :styles="inputStyles"
       :class="{ error: v$.userEmail.$error }"
-      :label="$t('PROFILE_SETTINGS.FORM.EMAIL.LABEL')"
-      :placeholder="$t('PROFILE_SETTINGS.FORM.EMAIL.PLACEHOLDER')"
+      :label="$t('PROFILE_SETTINGS.FORM.USERNAME.LABEL')"
+      :placeholder="$t('PROFILE_SETTINGS.FORM.USERNAME.PLACEHOLDER')"
       :error="`${
-        v$.userEmail.$error ? $t('PROFILE_SETTINGS.FORM.EMAIL.ERROR') : ''
+        v$.userEmail.$error ? $t('PROFILE_SETTINGS.FORM.USERNAME.ERROR') : ''
       }`"
       @input="v$.userEmail.$touch"
       @blur="v$.userEmail.$touch"
